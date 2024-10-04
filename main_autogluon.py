@@ -14,8 +14,6 @@ test_label = pd.read_csv(test_label_path).drop('id', axis = 1)
 label = 'home_team_win'
 
 t = pd.concat([test_ds, test_label], axis = 1)
-# print(t.head())
-# print(t.tail())
 
 predictor = TabularPredictor(label = label).fit(train_ds)
 # predictor = TabularPredictor.load('./AutogluonModels/ag-20241004_114459')

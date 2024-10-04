@@ -5,7 +5,7 @@ from pathlib import Path
 train_file_path = f'./dataset/pre_train_dataset.csv'
 test_file_path = f'./dataset/pre_test_dataset.csv'
 
-train_df = pd.read_csv(train_file_path)
+train_df = pd.read_csv(train_file_path).drop(['date', 'date.month', 'date.day', 'date.dayofweek'], axis = 1)
 test_df = pd.read_csv(test_file_path)
 
 model = CatBoostClassifier(
