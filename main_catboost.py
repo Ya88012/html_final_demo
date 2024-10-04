@@ -9,7 +9,7 @@ train_df = pd.read_csv(train_file_path)
 test_df = pd.read_csv(test_file_path)
 
 model = CatBoostClassifier(
-    iterations = 10,
+    iterations = 1500,
     task_type = 'GPU',
     devices = '0',
 )
