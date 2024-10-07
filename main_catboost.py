@@ -5,8 +5,12 @@ import json
 
 # train_file_path = f'./mixed_year/train_dataset.csv'
 # test_file_path = f'./mixed_year/test_dataset.csv'
-train_file_path = f'./pre_dataset/train_dataset.csv'
-test_file_path = f'./pre_dataset/test_dataset.csv'
+# train_file_path = f'./pre_dataset/train_dataset.csv'
+# test_file_path = f'./pre_dataset/test_dataset.csv'
+train_file_path = f'./slight_mix_dataset/train_dataset.csv'
+test_file_path = f'./slight_mix_dataset/test_dataset.csv'
+train_file_path = f'./pre_dataset/slight_train_dataset.csv'
+test_file_path = f'./pre_dataset/slight_test_dataset.csv'
 
 train_df = pd.read_csv(train_file_path)
 test_df = pd.read_csv(test_file_path)
@@ -34,6 +38,6 @@ for m, v in metrics.items():
     output_dict[m] = v[-1]
 
 Path('./result').mkdir(parents = True, exist_ok = True)
-with open( './result/catboost_result.txt', mode = 'w+' ) as f:
+with open( './result/slight_catboost_result.txt', mode = 'w+' ) as f:
     # print(output_dict, file = f)
     json.dump(output_dict, f, indent = 4)

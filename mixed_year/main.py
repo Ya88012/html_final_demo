@@ -2,8 +2,10 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split
 
-train_file_path = '../dataset/train_dataset.csv'
-test_file_path = '../dataset/test_dataset.csv'
+# train_file_path = '../dataset/train_dataset.csv'
+# test_file_path = '../dataset/test_dataset.csv'
+train_file_path = f'../slight_mix_dataset/train_dataset.csv'
+test_file_path = f'../slight_mix_dataset/test_dataset.csv'
 
 train_df = pd.read_csv(train_file_path).drop(['Unnamed: 0'], axis = 1)
 test_df = pd.read_csv(test_file_path)
@@ -26,5 +28,5 @@ test_df = pd.concat(test_sets.values()).drop(['year', 'date'], axis = 1)
 print(train_df)
 print(test_df)
 
-train_df.to_csv('./train_dataset.csv', index = False)
-test_df.to_csv('./test_dataset.csv', index = False)
+train_df.to_csv('./slight_train_dataset.csv', index = False)
+test_df.to_csv('./slight_test_dataset.csv', index = False)
