@@ -1,22 +1,23 @@
 import pandas as pd
 from catboost import CatBoostClassifier, Pool
 from pathlib import Path
+import json
 
-train_file_path = f'./dataset/pre_train_dataset.csv'
-test_file_path = f'./dataset/pre_test_dataset.csv'
+# train_file_path = f'./mixed_year/train_dataset.csv'
+# test_file_path = f'./mixed_year/test_dataset.csv'
+train_file_path = f'./pre_dataset/train_dataset.csv'
+test_file_path = f'./pre_dataset/test_dataset.csv'
 
-train_df = pd.read_csv(train_file_path).drop(['date', 'date.month', 'date.day', 'date.dayofweek'], axis = 1)
+train_df = pd.read_csv(train_file_path)
 test_df = pd.read_csv(test_file_path)
 
 model = CatBoostClassifier(
-    iterations = 1500,
-    task_type = 'GPU',
-    devices = '0',
+    iterations = 1000,
 )
 
 label = 'home_team_win'
-train_pool = Pool(train_df.drop(label, axis = 1), label = train_df[label])
-test_pool = Pool(test_df.drop(label, axis = 1), label = test_df[label])
+train_pool = Pool(train_df.drop([label], axis = 1), label = train_df[label])
+test_pool = Pool(test_df.drop([label], axis = 1), label = test_df[label])
 
 model.fit(train_pool)
 
@@ -26,7 +27,6 @@ metrics = model.eval_metrics(
 )
 
 # print(metrics)
-
 output_dict = {}
 print('final_result:')
 for m, v in metrics.items():
@@ -35,4 +35,5 @@ for m, v in metrics.items():
 
 Path('./result').mkdir(parents = True, exist_ok = True)
 with open( './result/catboost_result.txt', mode = 'w+' ) as f:
-    print(output_dict, file = f)
+    # print(output_dict, file = f)
+    json.dump(output_dict, f, indent = 4)
